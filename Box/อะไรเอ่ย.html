@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title> มีไรจะบอก </title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Comic Sans MS", "Segoe UI", cursive;
+        background: linear-gradient(135deg, #ffd6e0, #ffeaf4);
+        overflow: hidden;
+        text-align: center;
+    }
+
+    .screen {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .hidden { display: none; }
+
+    .box {
+        font-size: 100px;
+        cursor: pointer;
+        animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+        0%,100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .card {
+        background: #fff;
+        padding: 30px;
+        border-radius: 25px;
+        box-shadow: 0 10px 30px rgba(255,105,180,0.3);
+        position: relative;
+    }
+
+    h1 { color: #ff4d88; }
+
+    img {
+        max-width: 220px;
+        border-radius: 20px;
+        margin: 10px 0;
+    }
+
+    .btn {
+        padding: 12px 25px;
+        margin: 10px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    .yes {
+        background: #ff6fa5;
+        color: white;
+    }
+
+    .no {
+        background: #ddd;
+        position: absolute;
+    }
+
+    #message {
+        display: none;
+        font-size: 24px;
+        color: #ff4d88;
+    }
+</style>
+</head>
+
+<body onclick="enableSound()">
+
+<!-- เพลง -->
+<audio id="bgMusic" src="Img and song/ZENTYARB x PUNYARB - ฉบบปรบปรง Ft. LAZYLOXY Prod.by 1Rock [Official MV].mp3" loop autoplay muted></audio>
+
+<!-- หน้าลุ้น -->
+<div class="screen" id="surprise">
+    <h2 style="color:#ff6fa5;">มีอะไรจะให้...🎁(ลองกดที่ว่างที่ไม่ใช่กล่องดูก่อน)</h2>
+    <div class="box" onclick="openBox()">🎁</div>
+    <p>⬆️ กดที่กล่อง ⬆️</p>
+</div>
+
+<!-- หน้าหลัก -->
+<div class="screen hidden" id="main">
+    <div class="card">
+        <h1>ขอโอกาสอีกรอบได้มั้ยคับ จะทำให้ดีที่สุด💖</h1>
+
+        <img src="Img and song/Screenshot 2026-05-22 185121.png">
+
+        <br>
+        <button class="btn yes" onclick="sayYes()">โอเคคคคคคคค💕</button>
+        <button class="btn no" id="noBtn">ไม่ 😢</button>
+
+        <div id="message">เย่+1ล้าน💕❤️💕❤️</div>
+    </div>
+</div>
+
+<script>
+let soundEnabled = false;
+
+// เปิดเสียงหลัง user interaction
+function enableSound() {
+    if (!soundEnabled) {
+        const audio = document.getElementById("bgMusic");
+        audio.muted = false;
+        audio.play();
+        soundEnabled = true;
+    }
+}
+
+// เปิดกล่อง
+function openBox() {
+    document.getElementById("surprise").innerHTML =
+        "<h1 style='color:#ff6fa5;'>กำลังเปิด...</h1>";
+
+    setTimeout(() => {
+        document.getElementById("surprise").classList.add("hidden");
+        document.getElementById("main").classList.remove("hidden");
+    }, 1500);
+}
+
+// ปุ่มไม่หนี
+const noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover", () => {
+    noBtn.style.left = Math.random() * 300 + "px";
+    noBtn.style.top = Math.random() * 200 + "px";
+});
+
+// กดตกลง
+function sayYes() {
+    document.getElementById("message").style.display = "block";
+}
+</script>
+
+</body>
+</html>
